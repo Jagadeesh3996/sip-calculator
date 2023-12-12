@@ -1,0 +1,397 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+    --black : rgb(0, 0, 0);
+    --white : rgb(255, 255, 255);
+    --off-white : rgb(233, 229, 229);
+    --pink : rgb(209, 108, 125);
+    --dgreen : rgb(4, 74, 4);
+    --red : rgb(255, 0, 0);
+    --hbg-color : rgb(173, 223, 230);
+    --blue : rgb(173, 200, 200);
+    --f-bule : rgb(0, 0, 255);
+    --lb-color : rgb(64, 114, 128);
+    --info-color : rgb(5, 95, 95);
+
+    --med-font : 25px;
+    --h-font : 35px;
+}
+a{
+    text-decoration: none;
+    color: var(--black);
+}
+i{
+    color: var(--info-color);
+}
+
+/* Header section CSS */
+
+.header{
+    width: 100%;
+    height: 70px;
+    top: 0;
+    z-index: 1111;
+    padding: 15px;
+    text-align: center;
+    position: fixed;
+    color: var(--white);
+    text-shadow: 0 0 10px var(--black);
+    background-color: var(--hbg-color);
+    box-shadow: 0 0 20px var(--black);
+}
+
+/* Form Section CSS */
+
+.form{
+    width: 100%;
+    text-align: center;
+    margin: 100px 0;
+}
+.form input,
+.btn{
+    padding: 10px;
+    margin: 10px;
+    font-size: var(--med-font);
+    border: none;
+    text-decoration: underline;
+    background-color: var(--off-white);
+    border-radius: 10px;
+}
+.radio{
+    font-size: var(--med-font);
+    padding: 10px 0;
+    margin: 10px 0;
+}
+input[type='radio']{
+    transform: scale(1.5);
+}
+.radio input,
+.radio label{
+    cursor: pointer;
+}
+.sipDate{
+    font-size: var(--med-font);
+}
+
+/* Advance Option Section CSS */
+
+.advanced{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--med-font);
+}
+.advanced input{
+    display: none;
+}
+.advanced p{
+    margin: 10px;
+}
+.adCheck{
+    width: 60px;
+    height: 30px;
+    background-color: var(--blue);
+    border-radius: 30px;
+    position: relative;
+    cursor: pointer;
+}
+.adCheck::before{
+    position: absolute;
+    content: "";
+    width: 27px;
+    height: 27px;
+    background-color: var(--white);
+    border-radius: 50%;
+    margin: 1px;
+    transition: 0.5s;
+}
+input:checked + .adCheck{
+    background-color: var(--red);
+}
+input:checked + .adCheck::before{
+    transform: translateX(-29px);
+}
+
+/* Advanced Box CSS */
+
+.advanceBox{
+    display: none;  
+}
+.cf{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--med-font);
+}
+.cf p{
+    padding: 10px;
+}
+.dpCheck{
+    font-size: var(--med-font);
+}
+input[type='checkbox']{
+    transform: scale(1.5);
+}
+.dpBox{
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+.dpinfoDiv{
+    display: none;
+}
+.compound{
+    width: 150px;
+    font-size: 20px;
+    border: none;
+}
+.topUp{
+    width: 200px;
+    font-size: 20px;
+    border: none;
+    margin: 10px;
+}
+
+/* Button CSS */
+
+.btn{
+    text-decoration: none;
+    background-color: var(--pink);
+}
+.btn:hover{
+    background-color: var(--dgreen);
+    color: var(--white);
+}
+.btn:active{
+    color: var(--red);
+}
+
+/* Result Info Section CSS */
+
+.myDiv{
+    display: none;
+    flex-wrap: wrap;
+    width: 100%;
+    padding : 25px 0 50px;
+}
+.heading{
+    text-align: center;
+    font-size: var(--h-font);
+    text-decoration: underline;
+    color: var(--white);
+    margin: 20px;
+    padding: 10px;
+    border-radius: 15px;
+    background-color: var(--lb-color);
+}
+
+/* Chart Section CSS */
+
+.chart{
+    width: 40%;
+    text-align: center;
+}
+.stats{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 10px;
+}
+.chart-container{
+    padding: 10px;
+    width: 500px;
+    height: 500px;
+}
+.details li{
+    list-style: none;
+    padding: 5px;
+    text-align: left;
+    font-size: var(--med-font);
+}
+.details span{
+    font-weight: 600;
+}
+
+/* Result Section CSS */
+
+.result{
+    width: 60%;
+}
+.result-text{
+    font-size: var(--med-font);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+.result-text span{
+    font-weight: 600;
+}
+.boxs{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding-left: 20px;
+}
+#adDis{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 100%;
+}
+.result-box{
+    background-color: var(--off-white);
+    width: 48%;
+    margin: 5px;
+    padding: 10px;
+}
+#taxinfoDiv{
+    display: none;
+}
+/* Schedule Section CSS */
+
+.schedule{
+    width: 40%;
+    padding-top: 25px;
+}
+.radio{
+    text-align: center;
+}
+.yearOption{
+    display: none;
+}
+.monthOption{
+    display: none;
+}
+.monthOption,
+.yearOption{
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    overflow: scroll;
+    height: 90vh;
+}
+.sBox{
+    width: 60%;
+    padding: 20px;
+    margin: 10px;
+    background-color: var(--off-white);
+    font-size: 20px;
+}
+.sBox p{
+    position: relative;
+    padding: 5px;
+}
+.sBox span{
+    right: 0;
+    position: absolute;
+}
+
+/* Suggestion Section CSS */
+
+.suggestion{
+    width: 60%;
+    padding-top: 25px;
+    text-align: center;
+}
+.suggestion button{
+    width: 28%;
+}
+.buttons{
+    width: 90%;
+}
+
+/* Suggestion Result Box CSS */
+
+.sug-invest{
+    display: none;
+}
+.sug-retutn{
+    display: none;
+}
+.sug-tenure{
+    display: none;
+}
+.sug-invest,
+.sug-retutn,
+.sug-tenure{
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+    overflow: scroll;
+    height: 90vh;
+}
+.inv-head{
+    width: 80%;
+    font-size: var(--med-font);
+    padding: 10px;
+    margin: 10px;
+    position: relative;
+    text-align: left;
+    background-color: var(--off-white);
+}
+.inv-head h3{
+    text-align: center;
+}
+.inv-head span{
+    position: absolute;
+    right: 10px;
+}
+.table{
+    font-size: var(--med-font);
+}
+.table th{
+    background-color: var(--f-bule);
+    color: var(--white);
+    padding: 5px;
+    width: 250px;
+}
+.table td{
+    width: 250px;
+    padding: 5px;
+    background-color: var(--off-white);
+}
+
+/* Responsive Views */
+
+@media screen and (max-width : 1200px) {
+    :root{
+        --hbg-color : rgb(137, 133, 133);
+    }
+    .myDiv{
+        flex-direction: column;
+        align-items: center;
+    }
+    .chart,
+    .schedule,
+    .result,
+    .suggestion{
+        width: 90%;
+    }
+}
+
+@media screen and (max-width : 600px) {
+    :root{
+        --hbg-color : rgb(235, 84, 84);
+    }
+    .chart-container{
+        width: 400px;
+        height: 400px;
+    }
+    .result-text{
+        margin: 20px;
+    }
+    .result-box,
+    .sBox{
+        width: 80%;
+    }
+    .button{
+        display: flex;
+        flex-direction: column;
+    }
+    .suggestion button{
+        width: auto;
+    }
+}

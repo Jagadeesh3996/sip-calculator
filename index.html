@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- link css file-->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- link js file -->
+    <script src="script.js" defer></script>
+
+    <!-- Chart js CDN link -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- font-awesome link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>SIP Calculator</title>
+</head>
+<body>
+    
+    <!-- Header Section -->
+    
+    <header class="header">
+        <h1>SIP Calculator</h1>
+    </header>
+    
+    <!-- Form Section -->
+
+    <section>
+        <form id="form" class="form">
+            <input type="text" id="investment" inputmode="numeric" placeholder="Monthly Investment" maxlength="10" required><br>
+            <input type="text" id="return" inputmode="numeric" placeholder="Return Expected (%)" maxlength="2" required><br>
+            <input type="text" id="expense" inputmode="numeric" placeholder="Expense Ratio (%)" maxlength="1" required><br>
+            <input type="text" id="period" inputmode="numeric" placeholder="Investment Period" maxlength="3" required><br>
+            <div class="radio">
+                <input type="radio" name="time" id="timey" value="years" checked />
+                <label for="timey">Years</label>
+                <input type="radio" name="time" id="timem" value="month" />
+                <label for="timem">Month</label>
+            </div>
+            <label for="sipDate" class="sipDate">SIP Start on</label>
+            <input type="date" id="sipDate">
+            <div class="advanced">
+                <p>Advanced Option</p>
+                <input type="checkbox" name="adCheck" id="adCheck">
+                <label for="adCheck" class="adCheck"></label>
+            </div>
+
+            <!-- Advanced Section -->
+
+            <div class="advanceBox" id="advanceBox">
+                <div class="cf">
+                    <p>Compound Frequency</p>
+                    <select id="compound" class="compound">
+                        <option value="12">Yearly</option>
+                        <option value="6">Half Yearly</option>
+                        <option value="3">Quaterly</option>
+                        <option value="1">Monthly</option>
+                    </select>
+                </div>
+                <div class="dpCheck">
+                    <i class="fa fa-info-circle" id="dpInfo"></i>
+                    <div id="dpinfoDiv" class="dpinfoDiv">
+                        <p>Deposit period vs Investment Period</p>
+                        <p>Desposit Period is the period till when you continue to invest the amount</p>
+                        <p>Invesment Period is period till when your money remains invested. It should be equal to or more than the deposit period.</p>
+                        <p>For e.g You start a SIP of rs.1000/- per month and continue to invest for 1 year, so total deposit period is 1 year and total investment amount is Rs. 12000/- but now you have stopped investing more in SIP but you want that amount already invested remain invested for 5 more years. So 1 year will be deposit period and 6 year will be investment period.</p>
+                    </div>
+                    <label for="">Desposit Period same as Invesment Period</label>
+                    <input type="checkbox" name="dpCheck" id="dpCheck" checked>
+                </div>
+                <div class="dpBox" id="dpBox">
+                    <input type="text" id="depositPeriod" inputmode="numeric" placeholder="Deposit Period" maxlength="3">
+                    <div class="radio">
+                        <input type="radio" name="dPeriod" id="dpy" value="years" checked />
+                        <label for="dpy">Years</label>
+                        <input type="radio" name="dPeriod" id="dpm" value="month" />
+                        <label for="dpm">Month</label>
+                    </div>        
+                </div>
+                <input type="text" inputmode="numeric" id="intialInv" placeholder="Intial Investment" maxlength="10">
+                <input type="text" inputmode="numeric" id="inflation" placeholder="Inflation Rate %" maxlength="2"><br>
+                <input type="text" inputmode="numeric" id="topUp" placeholder="Top up Percentage %" maxlength="2">
+                <div class="radio">
+                    <input type="radio" name="periodTp" id="amount" value="years" />
+                    <label for="amount">Amount</label>
+                    <input type="radio" name="periodTp" id="percentage" value="month" checked />
+                    <label for="percentage">Percentage %</label>
+                </div>    
+                <select id="topUpPeriod" class="topUp">
+                    <option value="12">Top up Yearly</option>
+                    <option value="6">Top upHalf Yearly</option>
+                </select>
+            </div>
+            <button type="submit" class="btn" id="btn" >Calculate</button>
+            <button type="button" id="clear" class="btn">Clear</button>
+        </form>
+    </section>
+    
+    <!-- Result Info Section -->
+
+    <section class="myDiv" id="myDiv">
+
+        <!-- Chart SEction -->
+
+        <div class="chart">
+            <h1 class="heading">Chart Analysis</h1>
+            <div class="stats">
+                <div class="chart-container">
+                    <canvas id="myCharts"></canvas>
+                </div>
+                <div class="details">
+                    <ul>
+                        <li>Investment Amount - <span>&#8377;</span><span id="c1"></span></li>
+                        <li>Return Accrued - <span>&#8377;</span><span id="c2"></span></li>
+                        <li>Total Amount - <span>&#8377;</span><span id="c3"></span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Result Section -->
+
+        <div class="result">
+            <h1 class="heading">Investment Result</h1>
+            <div class="result-text">
+                <p>Gross maturity amount would be <span>&#8377;</span> <span id="text1"></span> after Total Investment of <span>&#8377;</span> <span id="text2"></span> (monthly <span>&#8377;</span> <span id="text3"></span>) for tenure of <span id="text4"></span> <span id="text5"></span> after deducting Expense Ratio of <span>&#8377;</span> <span id="text6"></span></p><br>
+                <p id="inflationDiv">Considering Inflation rate of <span id="text9"></span> Present value of matured amount would be <span>&#8377;</span><span id="text10"></span></p><br>
+                <p>Yout Money would be Multiplied by <span id="text7"></span> Times</p><br>
+                <p>Tax Applicable would be <span>&#8377;</span> <span id="text8"></span> (Long Term Capital Gain and Short Term Capital Gain considering Equity Funds)</p>
+            </div>
+            <div class="boxs">
+                <div class="result-box">
+                    <h1>Maturity Amount including Expense</h1>
+                    <h1>Rs : <span id="box1"></span></h1>
+                </div>
+                <div class="result-box">
+                    <h1>Gross Maturity Value</h1>
+                    <h1>Rs : <span id="box2"></span></h1>
+                </div>
+                <div class="result-box">
+                    <h1>Expense Ratio Deductions</h1>
+                    <h1>Rs : <span id="box3"></span></h1>
+                </div>
+                <div class="result-box">
+                    <h1>Return Accured</h1>
+                    <h1>Rs : <span id="box4"></span></h1>
+                </div>
+                <div class="result-box">
+                    <h1>Total Investment Amount</h1>
+                    <h1>Rs : <span id="box5"></span></h1>
+                </div>
+                <div class="result-box">
+                    <h1>Tax Applicable <i class="fa fa-info-circle" id="taxInfo"></i> </h1>
+                    <h1>Rs : <span id="box6"></span></h1>
+                </div>
+                <div id="taxinfoDiv">
+                    <p>This tax Calculation is based on recent change in Budget 2018 Considering taxes on Equity Fund.</p>
+                    <p>1.long Term Capital gain - Invesment is for more than 12 months. Profit made after 31st January 2018 is only considered.</p>
+                    <p>2. Short Term Capital gain - which is less than 12 months have 15% of tax.</p>
+                    <p>For e.g. if you have purchased equity mutual fund on 1 Jan 2017, 100 units of Rs.10/- each. On 31st January NAV was Rs.12/- and capitalised this investment in Dec 2018, at Rs.15/- So total LTCG would be 100*(15-12)= Rs.300/-, Benefits before 1st February 2018 will not be considered for LTCG. Also there is exemption of Rs.1 Lac for LTCG.</p>
+                </div>
+                <div class="result-box">
+                    <h1>Monthly Investment</h1>
+                    <h1>Rs : <span id="box7"></span></h1>
+                </div>
+                <div class="result-box">
+                    <h1>Tenure</h1>
+                    <h1>Month : <span id="box8"></span></h1>
+                </div>
+                <div class="result-box">
+                    <h1>Return Expected </h1>
+                    <h1>Rate : <span id="box9"></span></h1>
+                </div>
+                <div class="result-box">
+                    <h1>Expense Ratio</h1>
+                    <h1>Rate : <span id="box10"></span></h1>
+                </div>
+                <div id="adDis">
+                    <div class="result-box">
+                        <h1>SIP Start Date</h1>
+                        <h1>Date : <span id="box11"></span></h1>
+                    </div>
+                    <div class="result-box" id="dtm">
+                        <h1>Deposit Tenure</h1>
+                        <h1>Month : <span id="box12"></span></h1>
+                    </div>
+                    <div class="result-box" id="tup">
+                        <h1>Top Up Percent</h1>
+                        <h1>Rate : <span id="box13"></span></h1>
+                    </div>
+                    <div class="result-box" id="tua">
+                        <h1>Top Up Amount</h1>
+                        <h1>Rs : <span id="box14"></span></h1>
+                    </div>
+                    <div class="result-box" id="tuf">
+                        <h1>Top Up Frequency</h1>
+                        <h1>Period : <span id="box15"></span></h1>
+                    </div>
+                    <div class="result-box" id="iia">
+                        <h1>Inital Invesment</h1>
+                        <h1>Amount : <span id="box16"></span></h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Schedule Section -->
+
+        <div class="schedule">
+            <h1 class="heading">Investment schedule</h1>
+            <div class="radio">
+                <input type="radio" name="period" id="opty" value="years" />
+                <label for="opty">Years</label>
+                <input type="radio" name="period" id="optm" value="month" checked />
+                <label for="optm">Month</label>
+            </div>
+            <div id="yearOption" class="yearOption"></div>
+            <div id="monthOption" class="monthOption"></div>
+        </div>
+
+        <!-- Suggestion Section -->
+
+        <div class="suggestion">
+            <h1 class="heading">Suggestions</h1>
+            <div class="button">
+                <button class="btn" id="btnInv">Investment</button>
+                <button class="btn" id="btnRet">Returns</button>
+                <button class="btn" id="btnTen">Tenure</button>
+            </div>
+            <div id="sugInvest" class="sug-invest">
+                <div class="inv-head">
+                    <h3>Suggestions on Investment</h3>
+                    <p>Return (%) <span id="si1"></span></p>
+                    <p>Tenure (Months) <span id="si2"></span></p>
+                </div>
+                <table class="table">
+                    <tr>
+                        <th>Monthly Invesment</th>
+                        <th>Invested Amount</th>
+                        <th>Maturity Amount</th>
+                    </tr>
+                </table>
+                <div id="tableInv"></div>
+            </div>
+            <div id="sugRetutn" class="sug-retutn">
+                <div class="inv-head">
+                    <h3>Suggestions on Returns</h3>
+                    <p>Monthly Investment <span><span1>&#8377;</span1><span2 id="sr1"></span2></span></p>
+                    <p>Tenure (Months) <span id="sr2"></span></p>
+                </div>
+                <table class="table">
+                    <tr>
+                        <th>Return(%)</th>
+                        <th>Invested Amount</th>
+                        <th>Maturity Amount</th>
+                    </tr>
+                </table>
+                <div id="tableRet"></div>
+            </div>
+            <div id="sugTenure" class="sug-tenure">
+                <div class="inv-head">
+                    <h3>Suggestions on Tenure</h3>
+                    <p>Monthly Investment <span><span1>&#8377;</span1><span2 id="st1"></span2></span></p>
+                    <p>Return(%) <span id="st2"></span></p>
+                </div>
+                <table class="table">
+                    <tr>
+                        <th>Tenure (Years)</th>
+                        <th>Invested Amount</th>
+                        <th>Maturity Amount</th>
+                    </tr>
+                </table>
+                <div id="tableTen"></div>
+            </div>
+        </div>
+
+    </section>
+</body>
+</html>
