@@ -19,6 +19,6 @@ jobs:
           host: ${{ secrets.HOSTINGER_HOST }}       # Your Hostinger server IP or domain
           username: ${{ secrets.HOSTINGER_USER }}   # Your Hostinger SSH username
           key: ${{ secrets.HOSTINGER_SSH_KEY }}     # Your private SSH key
-          port: 22                                  # Default SSH port
+          port: 65002                                  # Default SSH port
           source: "."
           target: "/home/u556506625/domains/bharatmakers.com/public_html/test/"      # Your target directory
