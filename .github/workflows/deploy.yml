@@ -21,4 +21,4 @@ jobs:
           key: ${{ secrets.HOSTINGER_SSH_KEY }}     # Your private SSH key
           port: 22                                  # Default SSH port
           source: "."
-          target: "/home/username/public_html/"      # Your target directory
+          target: "/home/username/public_html/test.bharatmakers.com/"      # Your target directory
