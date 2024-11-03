@@ -1,0 +1,24 @@
+name: Deploy to Hostinger
+
+on:
+  push:
+    branches:
+      - main  # Change this to your default branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Copy files to Hostinger
+        uses: appleboy/scp-action@v0.1.2
+        with:
+          host: ${{ secrets.HOSTINGER_HOST }}       # Your Hostinger server IP or domain
+          username: ${{ secrets.HOSTINGER_USER }}   # Your Hostinger SSH username
+          key: ${{ secrets.HOSTINGER_SSH_KEY }}     # Your private SSH key
+          port: 22                                  # Default SSH port
+          source: "."
+          target: "/home/username/public_html/"      # Your target directory
